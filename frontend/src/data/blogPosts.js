@@ -3,22 +3,24 @@ export const blogPosts = [
   {
     id: 1,
     title: "The Future of AI in Healthcare",
-    excerpt: "Exploring how AI is transforming patient care and diagnostics",
+    excerpt: "Exploring how AI is transforming patient care and diagnostics.",
     date: "2023-10-15",
-    readTime: "5",
+    readTime: "5 min read",
     category: "AI",
     image: "/blog/ai-healthcare.jpg",
-    slug: "ai-in-healthcare"
+    slug: "ai-in-healthcare",
+    author: "Amit Giri"
   },
   {
     id: 2,
     title: "Responsive Design Best Practices",
-    excerpt: "Key techniques for building websites that work on all devices",
+    excerpt: "Key techniques for building websites that work seamlessly across all devices.",
     date: "2023-09-28",
-    readTime: "7",
+    readTime: "7 min read",
     category: "Web Development",
     image: "/blog/responsive-design.jpg",
-    slug: "responsive-design"
+    slug: "responsive-design",
+    author: "Amit Giri"
   },
-  // Add more blog posts as needed
+  // You can add more blog posts here
 ];

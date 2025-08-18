@@ -1,8 +1,31 @@
 // src/components/common/Footer.jsx
-import { motion } from 'framer-motion'
-import { FaFacebookF, FaTwitter, FaLinkedinIn, FaGithub, FaPhoneAlt, FaEnvelope } from 'react-icons/fa'
+import { motion } from "framer-motion";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaLinkedinIn,
+  FaGithub,
+  FaPhoneAlt,
+  FaEnvelope,
+} from "react-icons/fa";
 
 export default function Footer() {
+  const services = [
+    "Web Development",
+    "UI/UX Design",
+    "SEO Optimization",
+    "Custom Software",
+  ];
+
+  const company = ["About Us", "Careers", "Blog", "Contact"];
+
+  const socials = [
+    { icon: FaFacebookF, link: "#", label: "Facebook" },
+    { icon: FaTwitter, link: "#", label: "Twitter" },
+    { icon: FaLinkedinIn, link: "#", label: "LinkedIn" },
+    { icon: FaGithub, link: "#", label: "GitHub" },
+  ];
+
   return (
     <motion.footer
       className="bg-primary-dark text-white py-14"
@@ -12,64 +35,82 @@ export default function Footer() {
     >
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
-          
           {/* Brand */}
           <div>
             <h3 className="text-2xl font-bold mb-4">Healvance AI</h3>
             <p className="text-gray-300 leading-relaxed">
-              Innovative digital solutions for your business — from web apps to AI-powered tools.
+              Innovative digital solutions for your business — from web apps to
+              AI-powered tools.
             </p>
           </div>
 
           {/* Services */}
-          <div>
+          <nav aria-label="Services">
             <h4 className="font-semibold mb-4">Services</h4>
             <ul className="space-y-2">
-              {['Web Development', 'UI/UX Design', 'SEO Optimization', 'Custom Software'].map((service) => (
+              {services.map((service) => (
                 <li key={service}>
-                  <a href="#" className="text-gray-300 hover:text-white transition duration-200">{service}</a>
+                  <a
+                    href="#"
+                    className="text-gray-300 hover:text-white transition duration-200"
+                  >
+                    {service}
+                  </a>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
           {/* Company */}
-          <div>
+          <nav aria-label="Company">
             <h4 className="font-semibold mb-4">Company</h4>
             <ul className="space-y-2">
-              {['About Us', 'Careers', 'Blog', 'Contact'].map((item) => (
+              {company.map((item) => (
                 <li key={item}>
-                  <a href="#" className="text-gray-300 hover:text-white transition duration-200">{item}</a>
+                  <a
+                    href="#"
+                    className="text-gray-300 hover:text-white transition duration-200"
+                  >
+                    {item}
+                  </a>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
           {/* Contact & Social */}
-          <div>
+          <address className="not-italic">
             <h4 className="font-semibold mb-4">Connect</h4>
             <ul className="space-y-2">
               <li className="flex items-center space-x-2">
                 <FaPhoneAlt className="text-primary-light" />
-                <a href="tel:9205176755" className="text-gray-300 hover:text-white transition">+91 92051 76755</a>
+                <a
+                  href="tel:9205176755"
+                  className="text-gray-300 hover:text-white transition"
+                >
+                  +91 92051 76755
+                </a>
               </li>
               <li className="flex items-center space-x-2">
                 <FaEnvelope className="text-primary-light" />
-                <a href="mailto:contact@healvance.ai" className="text-gray-300 hover:text-white transition">contact@healvance.ai</a>
+                <a
+                  href="mailto:contact@healvance.ai"
+                  className="text-gray-300 hover:text-white transition"
+                >
+                  contact@healvance.ai
+                </a>
               </li>
             </ul>
+
+            {/* Social Icons */}
             <div className="flex space-x-4 mt-4">
-              {[
-                { icon: FaFacebookF, link: "#" },
-                { icon: FaTwitter, link: "#" },
-                { icon: FaLinkedinIn, link: "#" },
-                { icon: FaGithub, link: "#" }
-              ].map(({ icon: Icon, link }, idx) => (
+              {socials.map(({ icon: Icon, link, label }, idx) => (
                 <motion.a
                   key={idx}
                   href={link}
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={label}
                   whileHover={{ scale: 1.15 }}
                   className="p-2 bg-primary/20 rounded-full text-gray-300 hover:text-white hover:bg-primary transition"
                 >
@@ -77,7 +118,7 @@ export default function Footer() {
                 </motion.a>
               ))}
             </div>
-          </div>
+          </address>
         </div>
 
         {/* Bottom bar */}
@@ -86,5 +127,5 @@ export default function Footer() {
         </div>
       </div>
     </motion.footer>
-  )
+  );
 }

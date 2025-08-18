@@ -16,10 +16,10 @@ export default function BlogSection() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Our <span className="text-primary">Blog</span>
+            Latest <span className="text-primary">Insights</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Insights, trends, and best practices in digital solutions
+            Explore our articles on design, development, and digital innovation
           </p>
         </motion.div>
 
@@ -30,9 +30,10 @@ export default function BlogSection() {
               key={post.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -8 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300"
+              className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300"
             >
               {/* Image */}
               <div className="relative h-48 overflow-hidden">
@@ -48,19 +49,34 @@ export default function BlogSection() {
               </div>
 
               {/* Content */}
-              <div className="p-6">
+              <div className="p-6 flex flex-col h-full">
                 <div className="flex items-center text-sm text-gray-500 mb-3">
                   <span>{post.date}</span>
                   <span className="mx-2">•</span>
                   <span>{post.readTime} min read</span>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
+
+                <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
                   {post.title}
                 </h3>
-                <p className="text-gray-600 mb-4">{post.excerpt}</p>
+                <p className="text-gray-600 mb-4 line-clamp-3">{post.excerpt}</p>
+
+                {/* Author Info (optional) */}
+                {post.author && (
+                  <div className="flex items-center mt-auto mb-4">
+                    <img
+                      src={post.author.avatar || "/default-avatar.png"}
+                      alt={post.author.name}
+                      className="w-8 h-8 rounded-full mr-2"
+                      loading="lazy"
+                    />
+                    <span className="text-sm text-gray-700">{post.author.name}</span>
+                  </div>
+                )}
+
                 <Link
                   to={`/blog/${post.slug}`}
-                  className="text-primary font-semibold hover:text-primary-dark flex items-center group"
+                  className="text-primary font-semibold hover:text-primary-dark flex items-center group mt-auto"
                 >
                   Read more
                   <svg
@@ -80,6 +96,16 @@ export default function BlogSection() {
               </div>
             </motion.article>
           ))}
+        </div>
+
+        {/* View All Blogs */}
+        <div className="text-center mt-12">
+          <Link
+            to="/blog"
+            className="inline-block bg-primary text-white px-6 py-3 rounded-lg shadow hover:bg-primary-dark transition"
+          >
+            View All Blogs
+          </Link>
         </div>
       </div>
     </section>
