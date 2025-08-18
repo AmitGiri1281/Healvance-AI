@@ -20,10 +20,10 @@ export default function Footer() {
   const company = ["About Us", "Careers", "Blog", "Contact"];
 
   const socials = [
-    { icon: FaFacebookF, link: "#", label: "Facebook" },
-    { icon: FaTwitter, link: "#", label: "Twitter" },
-    { icon: FaLinkedinIn, link: "#", label: "LinkedIn" },
-    { icon: FaGithub, link: "#", label: "GitHub" },
+    { icon: FaFacebookF, link: "https://www.facebook.com/people/Amit-Giri/pfbid02cXeQns1Tv1SuMcYr9RBTFgKoxzQHceNV95RqF7Ar6B4QVbxpJKhy2suPr4HmGxddl/", label: "Facebook" },
+    { icon: FaTwitter, link: "https://www.linkedin.com/in/amitgiri8/", label: "Twitter" },
+    { icon: FaLinkedinIn, link: "https://www.linkedin.com/in/amitgiri8/", label: "LinkedIn" },
+    { icon: FaGithub, link: "https://github.com/AmitGiri1281", label: "GitHub" },
   ];
 
   return (
@@ -94,10 +94,10 @@ export default function Footer() {
               <li className="flex items-center space-x-2">
                 <FaEnvelope className="text-primary-light" />
                 <a
-                  href="mailto:contact@healvance.ai"
+                  href="mailto:healvanceai@gmail.com"
                   className="text-gray-300 hover:text-white transition"
                 >
-                  contact@healvance.ai
+                  healvanceai@gmail.com
                 </a>
               </li>
             </ul>
