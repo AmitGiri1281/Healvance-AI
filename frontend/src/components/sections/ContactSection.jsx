@@ -103,7 +103,7 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Email Us</h4>
-                  <a href="mailto:contact@healvance.ai" className="text-primary hover:underline">contact@healvance.ai</a>
+                  <a href="healvanceai@gmail.com" className="text-primary hover:underline">healvanceai@gmail.com</a>
                 </div>
               </div>
             </div>
