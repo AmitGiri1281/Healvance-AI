@@ -11,3 +11,4 @@ const contactSchema = new mongoose.Schema({
 });
 
 export default mongoose.model("Contact", contactSchema);
+//C:\Users\Lenovo\OneDrive\Desktop\Healvance-AI\backend\models\Contact.js
