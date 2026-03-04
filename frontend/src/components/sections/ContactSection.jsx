@@ -100,7 +100,7 @@ const response = await fetch(`${API_URL}/api/contact`, {
                 <div>
                   <h4 className="font-semibold text-gray-900">Call or WhatsApp</h4>
                   <a href="tel:9205176755" className="text-primary hover:underline">
-                    +91 92051 76755
+                    +91 9935344361
                   </a>
                 </div>
               </div>

@@ -1,140 +1,157 @@
 // src/components/common/Navbar.jsx
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { useLocation, Link } from "react-router-dom";
+import { Menu, X, ChevronDown } from "lucide-react";
 import AnimatedLogo from "./AnimatedLogo";
+
+const navLinks = [
+  { name: "Home", path: "/" },
+  {
+    name: "Services",
+    path: "/services",
+    dropdown: [
+      { name: "AI Solutions", path: "/services/ai-ml" },
+      { name: "Web Development", path: "/services/web" },
+      { name: "Cloud & APIs", path: "/services/cloud" },
+    ],
+  },
+  { name: "Portfolio", path: "/portfolio" },
+  { name: "Blog", path: "/blog" },
+];
+
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [dropdown, setDropdown] = useState(null);
   const location = useLocation();
 
-  // Detect scroll
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Menu items
-  const menuItems = ["Home", "Services", "Portfolio", "Blog", "Contact"];
-
-  // Function to check active route
-  const isActive = (item) => {
-    if (item === "Home") return location.pathname === "/";
-    return location.pathname.startsWith(`/${item.toLowerCase()}`);
-  };
+  const isActive = (path) =>
+    path === "/"
+      ? location.pathname === "/"
+      : location.pathname.startsWith(path);
 
   return (
-    <motion.nav
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "backdrop-blur-md bg-white/80 shadow-lg"
-          : "backdrop-blur-md bg-white/50"
-      }`}
-      initial={{ y: -50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.4 }}
-    >
-      <div className="container mx-auto px-6 flex justify-between items-center h-16">
+    <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-lg border-b border-black/5">
+      <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        
         {/* Logo */}
-       <AnimatedLogo />
+        <AnimatedLogo />
 
-
-        {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-8">
-          {menuItems.map((item) => (
-            <motion.div key={item} whileHover={{ scale: 1.05 }}>
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((item) => (
+            <div
+              key={item.name}
+              className="relative"
+              onMouseEnter={() => setDropdown(item.name)}
+              onMouseLeave={() => setDropdown(null)}
+            >
               <Link
-                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                className={`relative text-lg font-medium ${
-                  isActive(item)
-                    ? "text-primary"
-                    : "text-gray-800 hover:text-primary"
+                to={item.path}
+                className={`flex items-center gap-1 text-sm font-medium transition ${
+                  isActive(item.path)
+                    ? "text-blue-600"
+                    : "text-gray-700 hover:text-blue-600"
                 }`}
-                aria-current={isActive(item) ? "page" : undefined}
               >
-                {item}
-                {isActive(item) && (
-                  <motion.span
-                    layoutId="nav-underline"
-                    className="absolute left-0 top-full mt-1 h-0.5 w-full bg-primary"
-                    transition={{
-                      type: "spring",
-                      bounce: 0.2,
-                      duration: 0.6,
-                    }}
-                  />
-                )}
+                {item.name}
+                {item.dropdown && <ChevronDown size={14} />}
               </Link>
-            </motion.div>
+
+              {/* Dropdown */}
+              <AnimatePresence>
+                {item.dropdown && dropdown === item.name && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    className="absolute top-full mt-3 w-56 rounded-xl bg-white shadow-xl border border-gray-100 overflow-hidden"
+                  >
+                    {item.dropdown.map((sub) => (
+                      <Link
+                        key={sub.name}
+                        to={sub.path}
+                        className="block px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition"
+                      >
+                        {sub.name}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           ))}
+        </div>
+
+        {/* CTA */}
+        <div className="hidden md:flex items-center gap-4">
+          <Link
+            to="/contact"
+            className="px-5 py-2 text-sm font-semibold text-white rounded-full
+                       bg-blue-600 hover:bg-blue-700 transition"
+          >
+            Contact
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
         <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-gray-800 focus:outline-none"
-          aria-label="Toggle menu"
+          onClick={() => setOpen(!open)}
+          className="md:hidden text-gray-700"
         >
-          {isOpen ? (
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          ) : (
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          )}
+          {open ? <X /> : <Menu />}
         </button>
-      </div>
+      </nav>
 
       {/* Mobile Menu */}
       <AnimatePresence>
-        {isOpen && (
+        {open && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden bg-white shadow-lg"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="md:hidden bg-white border-t border-gray-200"
           >
-            {menuItems.map((item) => (
+            <div className="px-6 py-6 space-y-4">
+              {navLinks.map((item) => (
+                <div key={item.name}>
+                  <Link
+                    to={item.path}
+                    onClick={() => setOpen(false)}
+                    className="block py-2 text-gray-700 font-medium hover:text-blue-600"
+                  >
+                    {item.name}
+                  </Link>
+
+                  {item.dropdown && (
+                    <div className="pl-4 space-y-1">
+                      {item.dropdown.map((sub) => (
+                        <Link
+                          key={sub.name}
+                          to={sub.path}
+                          onClick={() => setOpen(false)}
+                          className="block py-1 text-sm text-gray-600 hover:text-blue-600"
+                        >
+                          {sub.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+
               <Link
-                key={item}
-                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                className={`block px-6 py-3 border-b text-lg font-medium ${
-                  isActive(item)
-                    ? "text-primary bg-gray-100"
-                    : "text-gray-800 hover:bg-gray-50"
-                }`}
-                onClick={() => setIsOpen(false)}
+                to="/contact"
+                onClick={() => setOpen(false)}
+                className="block text-center mt-6 px-6 py-3 bg-blue-600
+                           text-white rounded-full font-semibold"
               >
-                {item}
+                Contact Us
               </Link>
-            ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </header>
   );
 }

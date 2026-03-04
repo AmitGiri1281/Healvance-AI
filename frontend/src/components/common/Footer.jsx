@@ -1,163 +1,125 @@
 // src/components/common/Footer.jsx
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
-  FaFacebookF,
-  FaTwitter,
-  FaLinkedinIn,
-  FaGithub,
-  FaPhoneAlt,
-  FaEnvelope,
-} from "react-icons/fa";
+  Github,
+  Linkedin,
+  Twitter,
+  Mail,
+  Phone,
+  MapPin,
+  ArrowUp,
+  MessageSquare,
+} from "lucide-react";
 
 export default function Footer() {
-  const services = [
-    { name: "Web Development", link: "/services#web-development" },
-    { name: "UI/UX Design", link: "/services#ui-ux" },
-    { name: "SEO Optimization", link: "/services#seo" },
-    { name: "Custom Software", link: "/services#custom-software" },
-  ];
-
-  const company = [
-    { name: "About Us", link: "/about" },
-    { name: "Careers", link: "/careers" },
-    { name: "Blog", link: "/blog" },
-    { name: "Contact", link: "/contact" },
-  ];
-
-  const socials = [
-    {
-      icon: FaFacebookF,
-      link: "https://www.facebook.com/people/Amit-Giri/pfbid02cXeQns1Tv1SuMcYr9RBTFgKoxzQHceNV95RqF7Ar6B4QVbxpJKhy2suPr4HmGxddl/",
-      label: "Facebook",
-    },
-    {
-      icon: FaTwitter,
-      link: "https://twitter.com/yourhandle", // <-- replace with your actual Twitter
-      label: "Twitter",
-    },
-    {
-      icon: FaLinkedinIn,
-      link: "https://www.linkedin.com/in/amitgiri8/",
-      label: "LinkedIn",
-    },
-    {
-      icon: FaGithub,
-      link: "https://github.com/AmitGiri1281",
-      label: "GitHub",
-    },
-  ];
+  const scrollToTop = () =>
+    window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
-    <motion.footer
-      className="bg-primary-dark text-white py-14"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.6 }}
-      itemScope
-      itemType="https://schema.org/Organization"
-    >
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
-          {/* Brand */}
-          <div>
-            <h3 className="text-2xl font-bold mb-4" itemProp="name">
-              Healvance AI
-            </h3>
-            <p className="text-gray-300 leading-relaxed" itemProp="description">
-              Innovative digital solutions for your business — from web apps to
-              AI-powered tools.
-            </p>
+    <footer className="bg-black text-gray-400 relative">
+      <div className="max-w-7xl mx-auto px-6 py-16 grid gap-12 md:grid-cols-4">
+
+        {/* Brand */}
+        <div className="md:col-span-2">
+          <h2 className="text-3xl font-bold text-white mb-4">
+            Healvance <span className="text-blue-500">AI</span>
+          </h2>
+          <p className="max-w-md leading-relaxed">
+            AI-powered healthcare & business solutions built for speed,
+            security, and real-world impact.
+          </p>
+
+          {/* Socials */}
+          <div className="flex gap-4 mt-6">
+            <a href="https://github.com/AmitGiri1281" target="_blank">
+              <Github className="hover:text-white transition" />
+            </a>
+            <a href="https://www.linkedin.com/in/amitgiri8/" target="_blank">
+              <Linkedin className="hover:text-white transition" />
+            </a>
+            <a href="#" target="_blank">
+              <Twitter className="hover:text-white transition" />
+            </a>
           </div>
-
-          {/* Services */}
-          <nav aria-label="Services">
-            <h4 className="font-semibold mb-4">Services</h4>
-            <ul className="space-y-2">
-              {services.map(({ name, link }) => (
-                <li key={name}>
-                  <a
-                    href={link}
-                    className="text-gray-300 hover:text-white transition duration-200"
-                  >
-                    {name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* Company */}
-          <nav aria-label="Company">
-            <h4 className="font-semibold mb-4">Company</h4>
-            <ul className="space-y-2">
-              {company.map(({ name, link }) => (
-                <li key={name}>
-                  <a
-                    href={link}
-                    className="text-gray-300 hover:text-white transition duration-200"
-                  >
-                    {name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* Contact & Social */}
-          <address className="not-italic" itemProp="address">
-            <h4 className="font-semibold mb-4">Connect</h4>
-            <ul className="space-y-2">
-              <li className="flex items-center space-x-2">
-                <FaPhoneAlt className="text-primary" />
-                <a
-                  href="tel:+919205176755"
-                  className="text-gray-300 hover:text-white transition"
-                  itemProp="telephone"
-                  aria-label="Call Healvance AI"
-                >
-                  +91 92051 76755
-                </a>
-              </li>
-              <li className="flex items-center space-x-2">
-                <FaEnvelope className="text-primary" />
-                <a
-                  href="mailto:healvanceai@gmail.com"
-                  className="text-gray-300 hover:text-white transition"
-                  itemProp="email"
-                  aria-label="Email Healvance AI"
-                >
-                  healvanceai@gmail.com
-                </a>
-              </li>
-            </ul>
-
-            {/* Social Icons */}
-            <div className="flex space-x-4 mt-4">
-              {socials.map(({ icon: Icon, link, label }, idx) => (
-                <motion.a
-                  key={idx}
-                  href={link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  whileHover={{ scale: 1.15 }}
-                  className="p-2 bg-primary/20 rounded-full text-gray-300 hover:text-white hover:bg-primary transition"
-                  itemProp="sameAs"
-                >
-                  <Icon />
-                </motion.a>
-              ))}
-            </div>
-          </address>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-gray-700 mt-10 pt-6 text-center text-gray-400 text-sm">
-          <p>
-            © {new Date().getFullYear()} Healvance AI. All rights reserved.
-          </p>
+        {/* Services */}
+        <div>
+          <h4 className="text-white font-semibold mb-4">Services</h4>
+          <ul className="space-y-2">
+            {[
+              "AI Solutions",
+              "Web Development",
+              "Cloud & APIs",
+              "UI/UX Design",
+            ].map((item) => (
+              <li key={item}>
+                <Link to="/services" className="hover:text-white transition">
+                  {item}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Contact */}
+        <div>
+          <h4 className="text-white font-semibold mb-4">Contact</h4>
+          <ul className="space-y-3 text-sm">
+            <li className="flex items-center gap-2">
+              <MapPin size={16} /> New Delhi, India
+            </li>
+            <li className="flex items-center gap-2">
+              <Phone size={16} />
+              <a href="tel:+919935344361" className="hover:text-white">
+                +91 9935344361
+              </a>
+            </li>
+            <li className="flex items-center gap-2">
+              <Mail size={16} />
+              <a
+                href="mailto:healvanceai@gmail.com"
+                className="hover:text-white"
+              >
+                healvanceai@gmail.com
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
-    </motion.footer>
+
+      {/* Bottom bar */}
+      <div className="border-t border-white/10 py-6 px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+        <p>© {new Date().getFullYear()} Healvance AI. All rights reserved.</p>
+
+        <div className="flex gap-4">
+          <Link to="/privacy" className="hover:text-white">
+            Privacy
+          </Link>
+          <Link to="/terms" className="hover:text-white">
+            Terms
+          </Link>
+          <button
+            onClick={scrollToTop}
+            className="flex items-center gap-1 hover:text-white"
+          >
+            <ArrowUp size={14} /> Top
+          </button>
+        </div>
+      </div>
+
+      {/* Floating Chat Button */}
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="fixed bottom-6 right-6 w-14 h-14 rounded-full 
+                   bg-blue-600 text-white flex items-center justify-center 
+                   shadow-lg"
+        aria-label="Live Chat"
+      >
+        <MessageSquare />
+      </motion.button>
+    </footer>
   );
 }
