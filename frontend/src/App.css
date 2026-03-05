@@ -40,3 +40,49 @@
 .read-the-docs {
   color: #888;
 }
+/* Add to your src/index.css or src/App.css */
+
+/* Navbar spacer for non-home pages */
+:root {
+  --navbar-height: 64px;
+  --navbar-height-desktop: 80px;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --navbar-height: var(--navbar-height-desktop);
+  }
+}
+
+/* Home page specific styles */
+.home-page header {
+  position: absolute !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-bottom: none !important;
+}
+
+.home-page header.scrolled {
+  position: fixed !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(12px) !important;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Ensure hero section content is visible under absolute navbar */
+.home-page .hero-section {
+  min-height: 100vh;
+  padding-top: 0;
+}
+
+/* Smooth transitions */
+header {
+  transition: all 0.3s ease-in-out !important;
+}
+
+/* Main content spacing for non-home pages */
+main:not(.home-page) {
+  min-height: calc(100vh - var(--navbar-height) - 400px); /* Adjust footer height as needed */
+}
