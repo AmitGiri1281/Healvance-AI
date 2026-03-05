@@ -1,5 +1,4 @@
-// src/components/common/Navbar.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
@@ -23,6 +22,7 @@ const navLinks = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [dropdown, setDropdown] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
   const isActive = (path) =>
@@ -30,14 +30,35 @@ export default function Navbar() {
       ? location.pathname === "/"
       : location.pathname.startsWith(path);
 
+  // detect scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // close mobile menu on route change
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
+
   return (
-    <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-lg border-b border-black/5">
+    <header
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white/80 backdrop-blur-xl shadow-sm border-b border-black/5"
+          : "bg-transparent"
+      }`}
+    >
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        
+
         {/* Logo */}
         <AnimatedLogo />
 
-        {/* Desktop Nav */}
+        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((item) => (
             <div
@@ -55,16 +76,27 @@ export default function Navbar() {
                 }`}
               >
                 {item.name}
-                {item.dropdown && <ChevronDown size={14} />}
+
+                {item.dropdown && (
+                  <motion.span
+                    animate={{
+                      rotate: dropdown === item.name ? 180 : 0,
+                    }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <ChevronDown size={14} />
+                  </motion.span>
+                )}
               </Link>
 
               {/* Dropdown */}
               <AnimatePresence>
                 {item.dropdown && dropdown === item.name && (
                   <motion.div
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
+                    exit={{ opacity: 0, y: 12 }}
+                    transition={{ duration: 0.2 }}
                     className="absolute top-full mt-3 w-56 rounded-xl bg-white shadow-xl border border-gray-100 overflow-hidden"
                   >
                     {item.dropdown.map((sub) => (
@@ -87,8 +119,9 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-4">
           <Link
             to="/contact"
-            className="px-5 py-2 text-sm font-semibold text-white rounded-full
-                       bg-blue-600 hover:bg-blue-700 transition"
+            className="px-6 py-2.5 text-sm font-semibold text-white rounded-full
+            bg-gradient-to-r from-blue-600 to-cyan-500
+            hover:shadow-lg hover:shadow-blue-500/30 transition"
           >
             Contact
           </Link>
@@ -107,9 +140,9 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-white border-t border-gray-200"
           >
             <div className="px-6 py-6 space-y-4">
@@ -117,7 +150,6 @@ export default function Navbar() {
                 <div key={item.name}>
                   <Link
                     to={item.path}
-                    onClick={() => setOpen(false)}
                     className="block py-2 text-gray-700 font-medium hover:text-blue-600"
                   >
                     {item.name}
@@ -129,7 +161,6 @@ export default function Navbar() {
                         <Link
                           key={sub.name}
                           to={sub.path}
-                          onClick={() => setOpen(false)}
                           className="block py-1 text-sm text-gray-600 hover:text-blue-600"
                         >
                           {sub.name}
@@ -142,9 +173,8 @@ export default function Navbar() {
 
               <Link
                 to="/contact"
-                onClick={() => setOpen(false)}
                 className="block text-center mt-6 px-6 py-3 bg-blue-600
-                           text-white rounded-full font-semibold"
+                text-white rounded-full font-semibold"
               >
                 Contact Us
               </Link>
