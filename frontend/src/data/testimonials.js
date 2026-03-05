@@ -1,57 +1,56 @@
-// src/data/testimonials.js
 export const testimonials = [
-  {
-    id: 1,
-    name: "Dr. Sarah Johnson",
-    role: "CEO, HealthTech Solutions",
-    content: "Healvance AI transformed our patient management system with their custom software. The AI symptom checker reduced our triage time by 40% and improved diagnostic accuracy.",
-    rating: 5,
-    avatar: "/avatars/doctor-avatar.jpg",
-    project: "Healthcare Management System"
-  },
-  {
-    id: 2,
-    name: "Michael Chen",
-    role: "Principal, Greenfield Academy",
-    content: "Our school management system has never been more efficient. The parent-teacher portals and automated attendance tracking saved us 20+ administrative hours weekly.",
-    rating: 5,
-    avatar: "/avatars/educator-avatar.jpg",
-    project: "School Management System"
-  },
-  {
-    id: 3,
-    name: "Lisa Rodriguez",
-    role: "Marketing Director, UrbanStyle",
-    content: "The e-commerce platform increased our online sales by 150% in the first quarter. The seamless checkout experience reduced cart abandonment dramatically.",
-    rating: 4,
-    avatar: "/avatars/marketing-avatar.jpg",
-    project: "E-commerce Platform"
-  },
-  {
-    id: 4,
-    name: "David Kim",
-    role: "CTO, Finova Inc.",
-    content: "Their custom API integrations connected our legacy systems with modern microservices, solving years of technical debt in just 3 months.",
-    rating: 5,
-    avatar: "/avatars/executive-avatar.jpg",
-    project: "Custom Software Solution"
-  },
-  {
-    id: 5,
-    name: "Amanda Smith",
-    role: "Clinic Manager, VitalCare",
-    content: "The medical chatbot reduced our front desk workload by 60% while improving patient satisfaction scores. The AI triage is surprisingly accurate.",
-    rating: 4,
-    avatar: "/avatars/medical-avatar.jpg",
-    project: "Medical Symptom Analysis Bot"
-  },
-  {
-    id: 6,
-    name: "Robert Taylor",
-    role: "Founder, TechStart",
-    content: "Our website redesign increased lead conversion by 300%. The UI/UX team perfectly captured our brand while optimizing every touchpoint.",
-    rating: 5,
-    avatar: "/avatars/entrepreneur-avatar.jpg",
-    project: "Corporate Website Redesign"
-  }
+{
+id: 1,
+name: "Rakesh Kumar",
+role: "Director, JD Computer Education Jaunpur",
+content:
+"Healvance AI built our institute website and online admission system. The platform is fast, mobile friendly and helped us reach more students across Jaunpur district.",
+rating: 5,
+avatar: "/avatars/client1.jpg",
+project: "Computer Institute Website & Admission System"
+},
+
+{
+id: 2,
+name: "Dr. Anil Verma",
+role: "Clinic Owner, Varanasi",
+content:
+"The AI symptom assistant developed by Healvance AI helps our clinic pre-screen patients before consultation. It reduced waiting time and improved patient management.",
+rating: 5,
+avatar: "/avatars/client2.jpg",
+project: "AI Medical Assistant System"
+},
+
+{
+id: 3,
+name: "Priya Singh",
+role: "Founder, Urban Boutique",
+content:
+"Our online clothing store built by Healvance AI increased sales significantly. The website design is modern and checkout process is very smooth.",
+rating: 4,
+avatar: "/avatars/client3.jpg",
+project: "E-commerce Website"
+},
+
+{
+id: 4,
+name: "Amit Sharma",
+role: "School Administrator",
+content:
+"The school management portal developed by Healvance AI simplified attendance tracking and parent communication.",
+rating: 5,
+avatar: "/avatars/client4.jpg",
+project: "School Management System"
+},
+
+{
+id: 5,
+name: "Rahul Tiwari",
+role: "Startup Founder",
+content:
+"Healvance AI created our startup website and backend APIs. The development process was smooth and the system is very scalable.",
+rating: 5,
+avatar: "/avatars/client5.jpg",
+project: "Startup Web Platform"
+}
 ];

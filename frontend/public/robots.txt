@@ -1,4 +1,23 @@
+# robots.txt for Healvance AI
+
 User-agent: *
 Allow: /
 
+# Block unnecessary files
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.env
+Disallow: /backend/
+Disallow: /private/
+
+# Block system files
+Disallow: /*.json$
+Disallow: /*.log$
+Disallow: /*.env$
+
+# Allow important assets
+Allow: /assets/
+Allow: /images/
+
+# Sitemap
 Sitemap: https://www.healvanceai.help/sitemap.xml
