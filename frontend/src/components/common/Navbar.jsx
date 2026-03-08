@@ -16,9 +16,9 @@ const navLinks = [
     path: "/services",
     icon: "⚡",
     dropdown: [
-      { name: "AI & Machine Learning", path: "/services/ai-ml", description: "Intelligent automation solutions", icon: <Zap size={16} /> },
-      { name: "Web Development", path: "/services/web", description: "Modern web applications", icon: <Globe size={16} /> },
-      { name: "Cloud & APIs", path: "/services/cloud", description: "Scalable cloud infrastructure", icon: <Code size={16} /> },
+      { name: "AI & Machine Learning", path: "/services", description: "Intelligent automation solutions", icon: <Zap size={16} /> },
+      { name: "Web Development", path: "/services", description: "Modern web applications", icon: <Globe size={16} /> },
+      { name: "Cloud & APIs", path: "/services", description: "Scalable cloud infrastructure", icon: <Code size={16} /> },
     ],
   },
   { 
