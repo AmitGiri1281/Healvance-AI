@@ -55,7 +55,7 @@ export default function Navbar() {
     setIsScrolled(latest > 50);
     
     // Hide navbar on scroll down, show on scroll up
-    if (latest > previous && latest > 200) {
+    if (latest > previous && latest > 300) {
       setIsVisible(false);
     } else {
       setIsVisible(true);
@@ -66,7 +66,7 @@ export default function Navbar() {
 
   const isActive = (path) => {
     if (path === "/") return location.pathname === "/";
-    if (path === "/services") return location.pathname.startsWith("/services");
+    if (path === "/services") return location.pathname.includes(path);
     return location.pathname === path;
   };
 
@@ -87,7 +87,7 @@ export default function Navbar() {
   const handleDropdownLeave = () => {
     dropdownTimeout.current = setTimeout(() => {
       setActiveDropdown(null);
-    }, 150);
+    }, 250);
   };
 
   return (
